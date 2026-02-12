@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-sans-clean {
+  font-family: 'Inter', sans-serif;
+}
+@layer components {
+  .particle-hero {
+    @apply relative flex min-h-screen items-center justify-center overflow-hidden;
+    background: hsl(var(--background));
+  }
+
+  /* Force dark mode styling for this hero */
+  .particle-hero {
+    background: #000000;
+  }
+
+  .particle-canvas {
+    @apply absolute inset-0 h-full w-full;
+    opacity: 0.9;
+  }
+
+  .particle-fade {
+    @apply pointer-events-none absolute inset-0;
+    background: radial-gradient(
+      circle at 50% 50%,
+      transparent 30%,
+      #000000 70%
+    );
+  }
+
+  .particle-content {
+    @apply relative z-10 flex flex-col items-center px-6 text-center;
+  }
+
+  .particle-heading {
+    @apply max-w-3xl font-medium leading-[1.1] tracking-tight;
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    color: hsl(var(--card-foreground));
+  }
+
+  .particle-subtext {
+    @apply mt-6 text-base;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .particle-button {
+    @apply mt-8 inline-block rounded px-8 py-4 text-sm font-medium tracking-wide transition-all duration-300;
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+
+  .particle-button:hover {
+    filter: brightness(1.1);
+  }
+}
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 96.5%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.5%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96.5%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96.5%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
+    --radius: 0rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 0 0% 50%;
+
+    --navbar-height: 72px;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .tracking-tight-custom {
+    letter-spacing: -0.02em;
+  }
+
+  .tracking-tighter-custom {
+    letter-spacing: -0.03em;
+  }
+}
