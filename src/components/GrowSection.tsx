@@ -89,7 +89,13 @@ function SnapCarousel({ items }: { items: CardItem[] }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+  // Infinite Auto-Play Timer (1 Second)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [items]);
   const isMobile = winWidth < 768;
   const cardWidthPx = isMobile ? winWidth : (winWidth * 60) / 100;
   const GAP = isMobile ? 0 : 20; 
@@ -97,13 +103,14 @@ function SnapCarousel({ items }: { items: CardItem[] }) {
 
   const extended = [items[items.length - 1], ...items, items[0]];
 
+ // Infinite Loop Logic
   useEffect(() => {
     if (index === extended.length - 1) {
       setTimeout(() => {
         setIsAnimating(true);
         setIndex(1);
         setTimeout(() => setIsAnimating(false), 50);
-      }, 400);
+      }, 400); // Trigger transition reset
     }
     if (index === 0) {
       setTimeout(() => {
@@ -113,7 +120,6 @@ function SnapCarousel({ items }: { items: CardItem[] }) {
       }, 400);
     }
   }, [index, extended.length]);
-
   return (
     <div className="relative w-full overflow-hidden py-4">
       <motion.div
@@ -150,11 +156,18 @@ export default function GrowSection() {
       <BackgroundAnimated />
       
       <div className="relative w-full">
-        <ScrollReveal>
-          <div className="text-center px-6 mb-10">
-            <h2 className="text-4xl md:text-6xl font-light tracking-tight text-gray-900">
-              Our <span className="font-medium">Portfolio</span>
+         <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
+              Our Capabilities
+            </p>
+            <h2 className="text-[2.8rem] md:text-[3.5rem] lg:text-[4.2rem] font-light tracking-tight text-gray-900 leading-[1.1]">
+              Turn strategy
+              <span className="block font-medium">
+                into measurable growth
+              </span>
             </h2>
+            <div className="h-[2px] w-24 bg-gray-900/20 mx-auto mt-8 mb-8" />
           </div>
         </ScrollReveal>
 
@@ -166,7 +179,7 @@ export default function GrowSection() {
                 <button
                   key={cat}
                   onClick={() => setActive(cat)}
-                  className={`flex-shrink-0 px-6 py-2 rounded-[5px] text-xs font-semibold uppercase tracking-widest transition-all border ${
+                  className={`flex-shrink-0 px-6 py-2 rounded-[10px] text-xs font-semibold uppercase tracking-widest transition-all border ${
                     active === cat
                       ? "bg-black text-white border-black"
                       : "bg-white text-gray-400 border-gray-100"
