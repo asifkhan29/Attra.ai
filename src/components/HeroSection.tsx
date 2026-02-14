@@ -146,9 +146,7 @@ export default function HeroSection() {
           className="absolute bottom-[-150px] left-0 right-0 z-20"
           style={{ perspective: "2000px" }}
         >
-          {/* Soft mask for the carousel */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-[25%] bg-gradient-to-r from-[#0a0a0a] to-transparent z-30" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-[25%] bg-gradient-to-l from-[#0a0a0a] to-transparent z-30" />
+          
 
           <div className="overflow-visible">
             <div
@@ -171,13 +169,13 @@ export default function HeroSection() {
                   whileHover={{ y: -20, rotateY: 0, scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-sm shadow-2xl  hover:grayscale-0 transition-all duration-700">
                     <img
                       src={item.img}
                       alt={item.label}
                       className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/40" />
+                   
                     <div className="absolute bottom-6 left-8 text-white text-[11px] font-semibold tracking-[0.2em] uppercase">
                       {item.label}
                     </div>
