@@ -1,105 +1,128 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import BackgroundAnimated from "./BackgroundAnimated";
 
 const services = [
   {
+    number: "01",
     title: "Strategic Advisory",
-    description:
-      "Align executive vision with AI transformation roadmaps designed for sustainable competitive advantage.",
+    description: "Align executive vision with AI transformation roadmaps designed for sustainable competitive advantage and long-term value.",
   },
   {
+    number: "02",
     title: "Enterprise AI Delivery",
-    description:
-      "Design, architect, and deploy production-grade AI systems embedded directly into core operations.",
+    description: "Design, architect, and deploy production-grade AI systems embedded directly into your core business operations.",
   },
   {
+    number: "03",
     title: "Intelligent Automation",
-    description:
-      "Build scalable automation infrastructures that streamline workflows and unlock operational efficiency.",
+    description: "Build scalable automation infrastructures that streamline complex workflows and unlock hidden operational efficiency.",
   },
   {
-    title: "Performance & Optimization",
-    description:
-      "Continuously refine systems through analytics, governance, and measurable performance frameworks.",
+    number: "04",
+    title: "Performance & Governance",
+    description: "Continuously refine systems through advanced analytics, ethical governance, and measurable performance frameworks.",
   },
 ];
 
 export default function EnterpriseFeatureSection() {
   return (
-  <section className="relative w-full bg-white py-28 md:py-36 overflow-hidden">
-  <BackgroundAnimated />
+    <section className="relative w-full bg-white py-24 md:py-40 overflow-hidden text-gray-900">
+      <BackgroundAnimated />
 
-  <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-10">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+        
+        {/* ================= HEADER (Asymmetric Layout) ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-32 items-end">
+          <div className="lg:col-span-8">
+            <motion.p 
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] tracking-[0.5em] uppercase text-gray-400 mb-8 flex items-center gap-4"
+            >
+              <span className="w-8 h-[1px] bg-gray-200" /> Attra.ai / Core Capabilities
+            </motion.p>
 
-        {/* ================= HEADER ================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24 items-end">
-          
-          <div>
-            <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-6">
-              Core Services
-            </p>
-
-            <h2 className="text-[2.8rem] md:text-[3.6rem] lg:text-[4.4rem]
-                           leading-[1.05] font-light text-gray-900 tracking-tight">
-              Enterprise capabilities
-              <span className="block font-medium">
-                designed for scale
-              </span>
-            </h2>
-
-            <div className="h-[2px] w-24 bg-gray-900/20" />
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] leading-[0.9] font-light tracking-tighter text-gray-900"
+            >
+              Enterprise systems <br />
+              <span className="text-gray-300 italic font-normal italic">at scale.</span>
+            </motion.h2>
           </div>
 
-          <p className="text-[18px] text-gray-600 max-w-[480px] leading-relaxed">
-            Attra.ai integrates strategy, technology, and execution to help
-            organizations modernize operations, deploy responsible AI, and
-            achieve measurable transformation outcomes.
-          </p>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="lg:col-span-4 border-l border-gray-100 pl-8 pb-4"
+          >
+            <p className="text-lg text-gray-500 leading-relaxed font-light max-w-sm">
+              We integrate strategy and execution to help organizations modernize, 
+              deploy responsible AI, and achieve measurable outcomes.
+            </p>
+          </motion.div>
         </div>
 
-
-        {/* ================= CARDS ================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* ================= SERVICE GRID (Blueprint Style) ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-gray-200">
           {services.map((service, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              whileHover={{ y: -6 }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
               className="
                 group
-                bg-[#F7F7F5]
-                rounded-2xl
-                p-10
-                flex flex-col
-                justify-between
-                min-h-[380px]
+                relative
+                pt-16 pb-24 px-10
+                border-b md:border-r border-gray-200
+                last:border-r-0
                 transition-all
-                duration-300
-                hover:bg-[#F0F0ED]
+                duration-700
+                hover:bg-gray-50/30
               "
             >
-              <div>
-                <h3 className="text-[22px] font-medium text-gray-900 mb-5 tracking-tight">
-                  {service.title}
-                </h3>
+              {/* Top Accent Line - Animates on Hover */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+              
+              <div className="flex flex-col h-full justify-between">
+                <div>
+                  <div className="flex justify-between items-start mb-16">
+                    <span className="text-[11px] font-mono text-gray-400 group-hover:text-black transition-colors">
+                      [{service.number}]
+                    </span>
+                    <div className="w-2 h-2 rounded-full border border-gray-200 group-hover:bg-black group-hover:border-black transition-all duration-500" />
+                  </div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-light mb-6 tracking-tight text-gray-900 group-hover:translate-x-1 transition-transform duration-500">
+                    {service.title}
+                  </h3>
 
-                <p className="text-[15px] leading-relaxed text-gray-600">
-                  {service.description}
-                </p>
-              </div>
+                  <p className="text-[15px] leading-relaxed text-gray-500 group-hover:text-gray-800 transition-colors">
+                    {service.description}
+                  </p>
+                </div>
 
-              <div className="flex justify-end mt-12">
-                <motion.div
-                  whileHover={{ x: 6 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="text-gray-900 opacity-70 group-hover:opacity-100 transition"
-                >
-                  <ArrowRight size={20} strokeWidth={1.5} />
-                </motion.div>
+                <div className="mt-16 flex items-center justify-between">
+                    <div className="overflow-hidden h-5 relative flex-1">
+                        <motion.div 
+                          className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all duration-500 transform translate-y-6 group-hover:translate-y-0"
+                        >
+                          System Roadmap <ArrowUpRight size={14} />
+                        </motion.div>
+                        <div className="absolute inset-0 flex items-center group-hover:opacity-0 transition-opacity duration-500">
+                            <div className="w-12 h-[1px] bg-gray-200" />
+                        </div>
+                    </div>
+                </div>
               </div>
             </motion.div>
           ))}

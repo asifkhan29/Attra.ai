@@ -1,130 +1,122 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import consulting1 from "@/assets/showcase-1.jpg";
 import consulting2 from "@/assets/showcase-3.jpg";
 import consulting3 from "@/assets/showcase-4.jpg";
 
 export function WelcomeSection() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax offsets for the images
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -40]);
+
   return (
-    <section className="relative bg-foreground py-36 overflow-hidden">
+    <section ref={containerRef} className="relative bg-[#080808] py-32 md:py-48 overflow-hidden">
       
-      {/* Subtle radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_60%)]" />
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 opacity-10" 
+           style={{ backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, backgroundSize: '100px 100px' }} 
+      />
+      
+      {/* Dynamic Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-[1600px] px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mt-10">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-        {/* LEFT CONTENT */}
-        <div>
-          {/* Label */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 text-xs tracking-[0.35em] uppercase text-primary-foreground/40"
-          >
-            Welcome to
-          </motion.p>
-
-          {/* Heading with Highlight */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="text-[3.2rem] sm:text-[4rem] lg:text-[4.8rem] font-light leading-[1.05] tracking-tight"
-          >
-            <span className="text-primary-foreground">
-              Attra
-            </span>
-            <span className="bg-gradient-to-r from-white via-white/70 to-white/40 bg-clip-text text-transparent">
-              .ai
-            </span>
-          </motion.h2>
-
-          {/* Decorative underline */}
+        {/* LEFT CONTENT - Occupies 7 columns */}
+        <div className="lg:col-span-7">
           <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "120px" }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="h-[2px] bg-primary-foreground/30 mt-8 mb-10"
-          />
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-lg leading-relaxed text-primary-foreground/60"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Attra.ai is a global AI and strategy consulting firm empowering
-            enterprises to transform complexity into scalable growth.
-            We architect intelligent systems, modernize digital operations,
-            and design innovation frameworks that move organizations forward.
-          </motion.p>
+            <p className="mb-8 text-[10px] tracking-[0.5em] uppercase text-white/30 flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-white/20" />
+              Introduction
+            </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.35, duration: 0.8 }}
-            className="mt-6 text-lg leading-relaxed text-primary-foreground/50"
-          >
-            From AI strategy and automation to enterprise transformation and
-            global delivery, Attra.ai partners with visionary leaders to
-            deliver measurable outcomes across industries and continents.
-          </motion.p>
+            <h2 className="text-[3.5rem] md:text-[5rem] lg:text-[6.2rem] font-extralight leading-[0.9] tracking-tighter text-white mb-12">
+              Architecting <br />
+              <span className="italic font-normal text-white/40 italic">Intelligence.</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 1 }}
+            >
+              <p className="text-lg leading-relaxed text-white/60">
+                Attra.ai is a global collective of strategists and engineers. 
+                We don't just advise on the future; we build the infrastructure 
+                that makes it possible. From AI roadmaps to production-grade 
+                deployments, we move the needle for the world’s most ambitious 
+                enterprises.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className="flex flex-col justify-between"
+            >
+              <p className="text-lg leading-relaxed text-white/40">
+                Complexity is the barrier to scale. We simplify the path to 
+                transformation by integrating strategy, ethical governance, 
+                and high-performance execution into a single, seamless 
+                partnership model.
+              </p>
+              
+              {/* Refined "About" Link */}
+              <a href="#about" className="group mt-8 inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] text-white">
+                Learn more 
+                <span className="w-10 h-[1px] bg-white/20 group-hover:w-16 group-hover:bg-white transition-all duration-500" />
+              </a>
+            </motion.div>
+          </div>
         </div>
 
-        {/* RIGHT VISUAL STACK */}
-        <div className="relative h-[500px] hidden lg:block">
-
-          {/* Image 1 */}
+        {/* RIGHT VISUAL STACK - Occupies 5 columns */}
+        <div className="lg:col-span-5 relative h-[600px] flex items-center justify-center">
+          
+          {/* Main Background Image - Asymmetric */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="absolute top-0 left-10 w-[260px] rounded-xl overflow-hidden shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]"
+            style={{ y: y1 }}
+            className="absolute top-0 right-0 w-[280px] aspect-[3/4] overflow-hidden rounded-[2px] grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl z-20"
           >
-            <img
-              src={consulting1}
-              alt="AI Consulting"
-              className="w-full h-full object-cover"
-            />
+            <img src={consulting1} alt="Advisory" className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-1000" />
+            <div className="absolute inset-0 bg-black/20" />
           </motion.div>
 
-          {/* Image 2 */}
+          {/* Floating Accent Image */}
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.9 }}
-            className="absolute top-32 right-0 w-[280px] rounded-xl overflow-hidden shadow-[0_50px_90px_-30px_rgba(0,0,0,0.8)]"
+            style={{ y: y2 }}
+            className="absolute bottom-10 left-0 w-[220px] aspect-square overflow-hidden rounded-[2px] z-30 shadow-2xl border-[12px] border-[#080808]"
           >
-            <img
-              src={consulting2}
-              alt="Enterprise Strategy"
-              className="w-full h-full object-cover"
-            />
+            <img src={consulting2} alt="Strategy" className="w-full h-full object-cover" />
           </motion.div>
 
-          {/* Image 3 */}
+          {/* Deep Background Image */}
           <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 1 }}
-            className="absolute bottom-0 left-24 w-[240px] rounded-xl overflow-hidden shadow-[0_40px_70px_-25px_rgba(0,0,0,0.8)]"
+            style={{ y: y3 }}
+            className="absolute top-20 left-10 w-[200px] aspect-[4/5] overflow-hidden rounded-[2px] opacity-30 blur-[1px] z-10"
           >
-            <img
-              src={consulting3}
-              alt="Digital Transformation"
-              className="w-full h-full object-cover"
-            />
+            <img src={consulting3} alt="Data" className="w-full h-full object-cover" />
           </motion.div>
 
+          {/* Abstract Geometric Element */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-[-45deg] pointer-events-none" />
         </div>
 
       </div>
