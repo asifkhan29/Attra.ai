@@ -2,46 +2,51 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import BackgroundAnimated from "./BackgroundAnimated";
+import showcase1 from "@/assets/showcase-1.jpg";
+import showcase2 from "@/assets/showcase-2.jpg";
+import showcase3 from "@/assets/showcase-3.jpg";
+import showcase4 from "@/assets/showcase-4.jpg";
+import showcase5 from "@/assets/showcase-5.jpg";
 
 /* -------------------- DATA (Unchanged) -------------------- */
 const categories = ["AI Strategy", "LLM Integration", "Data Engineering", "AI Governance", "Custom Models", "AI Training"];
 
-const categoryContent = {
+const categoryContent: Record<string, { image: string }[]> = {
   "AI Strategy": [
-    { image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1400" },
+    { image: showcase1 },
+    { image: showcase2 },
+    { image: showcase3 },
+    { image: showcase4 },
   ],
   "LLM Integration": [
-    { image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1620712943543-bcc4638d9985?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400" },
+    { image: showcase5 },
+    { image: showcase1 },
+    { image: showcase4 },
+    { image: showcase2 },
   ],
   "Data Engineering": [
-    { image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1400" },
+    { image: showcase3 },
+    { image: showcase5 },
+    { image: showcase2 },
+    { image: showcase1 },
   ],
   "AI Governance": [
-    { image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1521791136364-758a4d31d949?q=80&w=1400" },
+    { image: showcase4 },
+    { image: showcase3 },
+    { image: showcase5 },
+    { image: showcase2 },
   ],
   "Custom Models": [
-    { image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400" },
+    { image: showcase2 },
+    { image: showcase4 },
+    { image: showcase1 },
+    { image: showcase3 },
   ],
   "AI Training": [
-    { image: "https://images.unsplash.com/photo-1524178232363-1fb28071457d?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400" },
-    { image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1400" },
+    { image: showcase1 },
+    { image: showcase5 },
+    { image: showcase3 },
+    { image: showcase4 },
   ],
 };
 
@@ -64,7 +69,7 @@ function FeatureCard({ item, isActive, isMobile }: { item: any; isActive: boolea
       className={`
         relative flex-shrink-0
         ${isMobile ? 'w-screen' : 'w-[60vw]'} 
-        h-[55vh] md:h-[750px]
+        h-[50vh] md:h-[700px]
         bg-black
         overflow-hidden
         rounded-[1px] 
@@ -72,7 +77,7 @@ function FeatureCard({ item, isActive, isMobile }: { item: any; isActive: boolea
       `}
     >
       {/* Parallax Image Container */}
-      <motion.div style={{ y: yRange }} className="absolute inset-0 h-[120%] w-full">
+      <motion.div style={{ y: yRange }} className="absolute inset-0 h-full w-full">
         <img
           src={item.image}
           alt="Banner"
